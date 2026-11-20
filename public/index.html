@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Auth view -->
+  <main id="auth-view" class="auth" hidden>
+    <div class="auth-card">
+      <h1 class="brand">Notes</h1>
+      <p class="muted">Simple, private notes with attachments.</p>
+
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab active" data-mode="login" role="tab">Log in</button>
+        <button type="button" class="tab" data-mode="signup" role="tab">Sign up</button>
+      </div>
+
+      <form id="auth-form" novalidate>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Password
+          <input type="password" name="password" autocomplete="current-password" minlength="8" required>
+        </label>
+        <p id="auth-error" class="error" hidden></p>
+        <button type="submit" class="primary" id="auth-submit">Log in</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- App view -->
+  <div id="app-view" class="app" hidden>
+    <header class="topbar">
+      <span class="brand">Notes</span>
+      <span class="spacer"></span>
+      <span id="user-email" class="muted"></span>
+      <button type="button" id="logout-btn" class="ghost">Log out</button>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <button type="button" id="new-note-btn" class="primary full">+ New note</button>
+        <ul id="note-list" class="note-list"></ul>
+        <p id="empty-list" class="muted small" hidden>No notes yet.</p>
+      </aside>
+
+      <section class="content">
+        <!-- Empty state -->
+        <div id="placeholder" class="placeholder">
+          <p class="muted">Select a note or create a new one.</p>
+        </div>
+
+        <!-- New note form -->
+        <form id="new-note-form" class="panel" hidden>
+          <h2>New note</h2>
+          <label>Title
+            <input name="title" maxlength="200" required>
+          </label>
+          <label>Body
+            <textarea name="body" rows="12"></textarea>
+          </label>
+          <p id="new-note-error" class="error" hidden></p>
+          <div class="row">
+            <button type="submit" class="primary">Save note</button>
+            <button type="button" id="cancel-new" class="ghost">Cancel</button>
+          </div>
+        </form>
+
+        <!-- Note detail -->
+        <article id="note-detail" class="panel" hidden>
+          <div class="row between">
+            <h2 id="note-title"></h2>
+            <button type="button" id="delete-note-btn" class="danger">Delete</button>
+          </div>
+          <p id="note-date" class="muted small"></p>
+          <div id="note-body" class="note-body"></div>
+
+          <h3>Attachments</h3>
+          <ul id="attachment-list" class="attachments"></ul>
+          <p id="no-attachments" class="muted small" hidden>No attachments.</p>
+
+          <form id="upload-form" class="upload row">
+            <input type="file" name="file" id="file-input" required>
+            <button type="submit" class="secondary">Upload</button>
+          </form>
+          <p id="upload-error" class="error" hidden></p>
+        </article>
+      </section>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
